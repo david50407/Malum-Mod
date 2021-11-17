@@ -135,9 +135,16 @@ public class RuneTableTileEntity extends MultiblockTileEntity implements ITickab
                 }
             }
         }
+        if (stacks.isEmpty())
+        {
+            // There's no extra ingredients, ignore this assembly
+            return;
+        }
         ItemStack centerStack = inventory.getStackInSlot(0);
         if (!centerStack.isEmpty())
         {
+            // Insert ingredient on the main part of rune table to the specific position:
+            //   [extra, main, extra]
             stacks.add(1, centerStack);
         }
         MalumRuneTableRecipes.MalumRuneTableRecipe recipe = MalumRuneTableRecipes.getRecipe(stacks);
